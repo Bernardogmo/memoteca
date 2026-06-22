@@ -24,6 +24,47 @@ const api = {
       throw error;
     }
   },
+
+  async buscarPensamentoPorId(id) {
+    try {
+      const resposta = await fetch(`http://localhost:3000/pensamentos/${id}`);
+      return await resposta.json();
+    } catch (error) {
+      alert("Ops, algo deu errado.");
+      throw error;
+    }
+  },
+
+  async editarPensamento(pensamento) {
+    try {
+      const resposta = await fetch(
+        `http://localhost:3000/pensamentos/${pensamento.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(pensamento),
+        },
+      );
+      return await resposta.json();
+    } catch (error) {
+      alert("Ops, algo deu errado.");
+      throw error;
+    }
+  },
+
+  async excluirPensamento(id) {
+    try {
+      const resposta = await fetch(`http://localhost:3000/pensamentos/${id}`, {
+        method: "DELETE",
+      });
+      return await resposta.json();
+    } catch (error) {
+      alert("Ops, algo deu errado.");
+      throw error;
+    }
+  },
 };
 
 export default api;
