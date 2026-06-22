@@ -3,8 +3,8 @@ const urlBase = "http://localhost:3000";
 const api = {
   async buscarPensamentos() {
     try {
-      const resposta = await fetch(`${urlBase}/pensamentos`);
-      return await resposta.json();
+      const resposta = await axios.get(`${urlBase}/pensamentos`);
+      return resposta.data;
     } catch (error) {
       alert("Ops, algo deu errado.");
       throw error;
@@ -13,14 +13,8 @@ const api = {
 
   async salvarPensamento(pensamento) {
     try {
-      const resposta = await fetch(`${urlBase}/pensamentos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(pensamento),
-      });
-      return await resposta.json();
+      const resposta = await axios.post(`${urlBase}/pensamentos`, pensamento);
+      return resposta.data;
     } catch (error) {
       alert("Ops, algo deu errado.");
       throw error;
@@ -29,8 +23,8 @@ const api = {
 
   async buscarPensamentoPorId(id) {
     try {
-      const resposta = await fetch(`${urlBase}/pensamentos/${id}`);
-      return await resposta.json();
+      const resposta = await axios.get(`${urlBase}/pensamentos/${id}`);
+      return resposta.data;
     } catch (error) {
       alert("Ops, algo deu errado.");
       throw error;
@@ -39,14 +33,11 @@ const api = {
 
   async editarPensamento(pensamento) {
     try {
-      const resposta = await fetch(`${urlBase}/pensamentos/${pensamento.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(pensamento),
-      });
-      return await resposta.json();
+      const resposta = await axios.put(
+        `${urlBase}/pensamentos/${pensamento.id}`,
+        pensamento,
+      );
+      return resposta.data;
     } catch (error) {
       alert("Ops, algo deu errado.");
       throw error;
@@ -55,10 +46,8 @@ const api = {
 
   async excluirPensamento(id) {
     try {
-      const resposta = await fetch(`${urlBase}/pensamentos/${id}`, {
-        method: "DELETE",
-      });
-      return await resposta.json();
+      const resposta = await axios.delete(`${urlBase}/pensamentos/${id}`);
+      return resposta.data;
     } catch (error) {
       alert("Ops, algo deu errado.");
       throw error;
